@@ -28,6 +28,9 @@ class DjangoPaginationConnectionField(DjangoFilterConnectionField):
         self._extra_filter_meta = extra_filter_meta
         self._base_args = None
 
+        # remove none values from kwargs
+        kwargs = {k: v for k, v in kwargs.items() if v is not None}
+
         kwargs.setdefault("limit", Int(description="Query limit"))
         kwargs.setdefault("offset", Int(description="Query offset"))
         kwargs.setdefault("ordering", String(description="Query order"))
